@@ -1,0 +1,177 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">FORTNITE COMPARATOR</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/top" title="Lien actif">TOP <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/kill" title="Lien actif">KILL <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/time" title="Lien actif">TIME <span class="sr-only">(current)</span></a></li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<h2 style="display:none;" id="infos_player"><%=JSON.stringify(infos_players) %></h2>
+
+<div style="width:25%;height:300px;float:left;margin-top: 2%;text-align:center;">
+    <a>TOP 1 SOLO</a>
+    <div id="div_top1_solo" style="width:100%;height:300px;float:left;"></div>
+</div>
+
+<div style="width:25%;height:300px;float:left;margin-top: 2%;text-align:center;">
+    <a>TOP 10 SOLO</a>
+    <div id="div_top10_solo" style="width:100%;height:300px;float:left;"></div>
+</div>
+
+<div style="width:25%;height:300px;float:left;margin-top: 2%;text-align:center;">
+    <a>TOP 25 SOLO</a>
+    <div id="div_top25_solo" style="width:100%;height:300px;float:left;"></div>
+</div>
+
+
+<div style="width:25%;height:300px;float:left;margin-top: 2%;text-align:center;">
+    <a>TOP 1 DUO</a>
+    <div id="div_top1_duo" style="width:100%;height:300px;float:left;"></div>
+</div>
+
+<div style="width:25%;height:300px;float:left;margin-top: 2%;text-align:center;">
+    <a>TOP 5 DUO</a>
+    <div id="div_top5_duo" style="width:100%;height:300px;float:left;"></div>
+</div>
+
+<div style="width:25%;height:300px;float:left;margin-top: 2%;text-align:center;">
+    <a>TOP 12 DUO</a>
+    <div id="div_top12_duo" style="width:100%;height:300px;float:left;"></div>
+</div>
+
+
+<div style="width:25%;height:300px;float:left;margin-top: 2%;text-align:center;">
+    <a>TOP 1 SECTION</a>
+    <div id="div_top1_section" style="width:100%;height:300px;float:left;"></div>
+</div>
+
+<div style="width:25%;height:300px;float:left;margin-top: 2%;text-align:center;">
+    <a>TOP 3 SECTION</a>
+    <div id="div_top3_section" style="width:100%;height:300px;float:left;"></div>
+</div>
+
+    <div style="width:25%;height:300px;float:left;margin-top: 2%;text-align:center;">
+        <a>TOP 6 SECTION</a>
+        <div id="div_top6_section" style="width:100%;height:300px;float:left;"></div>
+    </div>
+
+<script type="text/javascript" src="/public/js/flot/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/public/js/flot/jquery.flot.js"></script>
+<script type="text/javascript" src="/public/js/flot/jquery.flot.time.js"></script>    
+<script type="text/javascript" src="/public/js/flot/jquery.flot.symbol.js"></script>
+
+<script type="text/javascript">
+
+    var infos_players = JSON.parse($("#infos_player").html());
+
+    var dataset_top1_solo = [{data:[[0, infos_players[0]._top1_solo]], color: "#d4280a" },
+                            {data:[[1, infos_players[1]._top1_solo]], color:"#950bc5"},
+                            {data:[[2, infos_players[2]._top1_solo]], color:"#1774c9"},
+                            {data:[[3, infos_players[3]._top1_solo]], color:"#18b23a"}];
+
+    var dataset_top10_solo = [{data:[[0, infos_players[0]._top10_solo]], color: "#d4280a" },
+                            {data:[[1, infos_players[1]._top10_solo]], color:"#950bc5"},
+                            {data:[[2, infos_players[2]._top10_solo]], color:"#1774c9"},
+                            {data:[[3, infos_players[3]._top10_solo]], color:"#18b23a"}];
+                            
+    var dataset_top25_solo = [{data:[[0, infos_players[0]._top25_solo]], color: "#d4280a" },
+                            {data:[[1, infos_players[1]._top25_solo]], color:"#950bc5"},
+                            {data:[[2, infos_players[2]._top25_solo]], color:"#1774c9"},
+                            {data:[[3, infos_players[3]._top25_solo]], color:"#18b23a"}];  
+
+    var dataset_top1_duo = [{data:[[0, infos_players[0]._top1_duo]], color: "#d4280a" },
+                            {data:[[1, infos_players[1]._top1_duo]], color:"#950bc5"},
+                            {data:[[2, infos_players[2]._top1_duo]], color:"#1774c9"},
+                            {data:[[3, infos_players[3]._top1_duo]], color:"#18b23a"}];
+
+    var dataset_top5_duo = [{data:[[0, infos_players[0]._top5_duo]], color: "#d4280a" },
+                            {data:[[1, infos_players[1]._top5_duo]], color:"#950bc5"},
+                            {data:[[2, infos_players[2]._top5_duo]], color:"#1774c9"},
+                            {data:[[3, infos_players[3]._top5_duo]], color:"#18b23a"}];
+                            
+    var dataset_top12_duo = [{data:[[0, infos_players[0]._top12_duo]], color: "#d4280a" },
+                            {data:[[1, infos_players[1]._top12_duo]], color:"#950bc5"},
+                            {data:[[2, infos_players[2]._top12_duo]], color:"#1774c9"},
+                            {data:[[3, infos_players[3]._top12_duo]], color:"#18b23a"}];                            
+                        
+    var dataset_top1_section = [{data:[[0, infos_players[0]._top1_section]], color: "#d4280a" },
+                                {data:[[1, infos_players[1]._top1_section]], color:"#950bc5"},
+                                {data:[[2, infos_players[2]._top1_section]], color:"#1774c9"},
+                                {data:[[3, infos_players[3]._top1_section]], color:"#18b23a"}];
+
+    var dataset_top3_section = [{data:[[0, infos_players[0]._top3_section]], color: "#d4280a" },
+                                {data:[[1, infos_players[1]._top3_section]], color:"#950bc5"},
+                                {data:[[2, infos_players[2]._top3_section]], color:"#1774c9"},
+                                {data:[[3, infos_players[3]._top3_section]], color:"#18b23a"}];
+                                
+    var dataset_top6_section = [{data:[[0, infos_players[0]._top6_section]], color: "#d4280a" },
+                                {data:[[1, infos_players[1]._top6_section]], color:"#950bc5"},
+                                {data:[[2, infos_players[2]._top6_section]], color:"#1774c9"},
+                                {data:[[3, infos_players[3]._top6_section]], color:"#18b23a"}];
+                                
+    put_data($("#div_top1_solo"), dataset_top1_solo);
+    put_data($("#div_top10_solo"), dataset_top10_solo);
+    put_data($("#div_top25_solo"), dataset_top25_solo);
+    put_data($("#div_top1_duo"), dataset_top1_duo);
+    put_data($("#div_top5_duo"), dataset_top5_duo);
+    put_data($("#div_top12_duo"), dataset_top12_duo);
+    put_data($("#div_top1_section"), dataset_top1_section);
+    put_data($("#div_top3_section"), dataset_top3_section);
+    put_data($("#div_top6_section"), dataset_top6_section);
+    
+    function put_data(place_holder, dataset) {
+
+        var ticks = [[0, infos_players[0]._name], [1, infos_players[1]._name], [2, infos_players[2]._name], [3, infos_players[3]._name]];
+    
+            var options = {
+                series: {
+                    bars: {
+                        show: true
+                    }
+                },
+                bars: {
+                    align: "center",
+                    barWidth: 0.5,
+                    fill:1,
+                    stack:true,
+                },
+                xaxis: {
+                    axisLabelUseCanvas: true,
+                    axisLabelFontSizePixels: 12,
+                    axisLabelFontFamily: 'Verdana, Arial',
+                    axisLabelPadding: 10,
+                    ticks: ticks
+                },
+                yaxis: {
+                    axisLabelUseCanvas: true,
+                    axisLabelFontSizePixels: 12,
+                    axisLabelFontFamily: 'Verdana, Arial',
+                    axisLabelPadding: 3,
+                    tickFormatter: function (v, axis) {
+                        return Math.round(v * 100) / 100
+                    }
+                },
+                legend: {
+                 },
+                grid: {
+                    borderWidth: 1,
+                    backgroundColor: { colors: ["#ffffff", "#EDF5FF"] }
+                }
+            };
+    
+        $(document).ready(function () {
+            $.plot(place_holder, dataset, options);
+        });
+    }
+</script>
+

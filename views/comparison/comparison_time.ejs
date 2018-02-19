@@ -1,0 +1,112 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">FORTNITE COMPARATOR</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/top" title="Lien actif">TOP <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/kill" title="Lien actif">KILL <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/time" title="Lien actif">TIME <span class="sr-only">(current)</span></a></li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<h2 style="display:none;" id="infos_player"><%=JSON.stringify(infos_players) %></h2>
+
+<div style="width:25%;height:300px;float:left;margin-top: 2%;text-align:center;">
+    <a>TIME PLAYED</a>
+    <div id="div_time_played" style="width:100%;height:300px;float:left;"></div>
+</div>
+
+<div style="width:25%;height:300px;float:left;margin-top: 2%;text-align:center;">
+    <a>TIME AVG</a>
+    <div id="div_time_avg" style="width:100%;height:300px;float:left;"></div>
+</div>
+
+
+<script type="text/javascript" src="/public/js/flot/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/public/js/flot/jquery.flot.js"></script>
+<script type="text/javascript" src="/public/js/flot/jquery.flot.time.js"></script>    
+<script type="text/javascript" src="/public/js/flot/jquery.flot.symbol.js"></script>
+
+<script type="text/javascript">
+
+    var infos_players = JSON.parse($("#infos_player").html());
+                                
+    var dataset_time_played = [{data:[[0, infos_players[0]._time_played]], color: "#d4280a" },
+                               {data:[[1, infos_players[1]._time_played]], color:"#950bc5"},
+                               {data:[[2, infos_players[2]._time_played]], color:"#1774c9"},
+                               {data:[[3, infos_players[3]._time_played]], color:"#18b23a"}];   
+                                
+    var dataset_time_avg = [{data:[[0, infos_players[0]._time_avg]], color: "#d4280a" },
+                            {data:[[1, infos_players[1]._time_avg]], color:"#950bc5"},
+                            {data:[[2, infos_players[2]._time_avg]], color:"#1774c9"},
+                            {data:[[3, infos_players[3]._time_avg]], color:"#18b23a"}];                                 
+
+
+    put_data($("#div_time_played"), dataset_time_played);
+    put_data($("#div_time_avg"), dataset_time_avg);
+    
+    function put_data(place_holder, dataset) {
+
+        var ticks = [[0, infos_players[0]._name], [1, infos_players[1]._name], [2, infos_players[2]._name], [3, infos_players[3]._name]];
+    
+            var options = {
+                series: {
+                    bars: {
+                        show: true
+                    }
+                },
+                bars: {
+                    align: "center",
+                    barWidth: 0.5,
+                    fill:1,
+                    stack:true,
+                },
+                xaxis: {
+                    axisLabelUseCanvas: true,
+                    axisLabelFontSizePixels: 12,
+                    axisLabelFontFamily: 'Verdana, Arial',
+                    axisLabelPadding: 10,
+                    ticks: ticks
+                },
+                yaxis: {
+                    axisLabelUseCanvas: true,
+                    axisLabelFontSizePixels: 12,
+                    axisLabelFontFamily: 'Verdana, Arial',
+                    axisLabelPadding: 3,
+                    tickFormatter: function (v, axis) {
+                        return v.toString().toHHMMSS();
+                    }
+                },
+                legend: {
+                 },
+                grid: {
+                    borderWidth: 1,
+                    backgroundColor: { colors: ["#ffffff", "#EDF5FF"] }
+                }
+            };
+    
+        $(document).ready(function () {
+            $.plot(place_holder, dataset, options);
+        });
+    }
+
+    String.prototype.toHHMMSS = function () {
+        var sec_num = parseInt(this, 10);
+        var hours   = Math.floor(sec_num / 3600);
+        var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+        var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+        if (hours   < 10) {hours   = "0"+hours;}
+        if (minutes < 10) {minutes = "0"+minutes;}
+        if (seconds < 10) {seconds = "0"+seconds;}
+        return hours+':'+minutes+':'+seconds;
+    }
+</script>
+

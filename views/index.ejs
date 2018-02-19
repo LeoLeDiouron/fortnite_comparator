@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">FORTNITE COMPARATOR</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/top" title="Lien actif">TOP <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/kill" title="Lien actif">KILL <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/time" title="Lien actif">TIME <span class="sr-only">(current)</span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<body align=center>
+    <div style="margin-top:12%;">
+
+        <%= message %></br></br></br>
+
+        <form method="post" action="/">
+            <p><input type="text" name="player_1" placeholder="player 1"/></p>
+            <p><input type="text" name="player_2" placeholder="player 2"/></p>
+            <p><input type="text" name="player_3" placeholder="player 3"/></p>
+            <p><input type="text" name="player_4" placeholder="player 4"/></p>
+            <input type="submit" value="Lancer le versus" />
+        </form>
+    </div>
+</body>
