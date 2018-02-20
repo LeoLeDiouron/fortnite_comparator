@@ -30,7 +30,7 @@ class DatasFortnite {
 
     //récupère le JSON en String, et le transforme en objet
     parseDatas(datas) {
-        console.log(datas + "\n");
+        //console.log(datas + "\n");
         this._datas_str = JSON.parse(datas);
         if ("accountId" in this._datas_str) {
             this.parseInfosPlayer();
