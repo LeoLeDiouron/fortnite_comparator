@@ -74,7 +74,7 @@ app.use(require('express').static('.'));
 
 app.use('/public', express.static(path.join(__dirname + 'public')));
 
-app.listen(8080);
+app.listen(process.env.PORT || 8080);
 
 async function get_datas_from_api(res, show) {
     for (var idx = 0; idx < name_players.length; idx++) {
